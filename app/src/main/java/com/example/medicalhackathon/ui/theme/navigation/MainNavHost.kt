@@ -1,7 +1,5 @@
 package com.example.medicalhackathon.ui.theme.navigation
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,7 +12,6 @@ import androidx.navigation.compose.rememberNavController
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String,
 ) {
     NavHost(
         navController,
