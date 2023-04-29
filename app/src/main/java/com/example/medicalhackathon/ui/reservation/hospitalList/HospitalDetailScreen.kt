@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.medicalhackathon.R
 import com.example.medicalhackathon.UtilColor.mainColor
 import com.example.medicalhackathon.UtilColor.originalGrayColor
+import com.example.medicalhackathon.UtilPadding.startPadding
 import com.example.medicalhackathon.ui.UtilText.hospitalAddress1
 import com.example.medicalhackathon.ui.UtilText.hospitalName1
 import com.example.medicalhackathon.ui.common.HackathonTopAppBar
@@ -38,8 +39,6 @@ fun HospitalDetailScreen(
     modifier: Modifier = Modifier,
     onReservationClick: () -> Unit,
 ) {
-    val startPadding = 20.dp
-
     Scaffold(
         topBar = {
             HackathonTopAppBar(
