@@ -7,7 +7,13 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
 @Composable
 fun QrCodeScreen(){
-    Text(text = "QrCodeScreen")
+//    Text(text = "QrCodeScreen")
+
+    // TODO
+    QrCodeGenerate(
+        url ="https://moicen-forest.connpass.com/event/277791/",
+        size = 300,
+    )
 }
 
 @Preview
