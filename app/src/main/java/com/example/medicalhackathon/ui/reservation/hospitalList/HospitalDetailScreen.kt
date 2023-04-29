@@ -36,6 +36,7 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 @Composable
 fun HospitalDetailScreen(
     modifier: Modifier = Modifier,
+    onReservationClick: () -> Unit,
 ) {
     val startPadding = 20.dp
 
@@ -107,7 +108,7 @@ fun HospitalDetailScreen(
                     contentAlignment = Alignment.Center,
                 ) {
                     Button(
-                        onClick = { /*TODO*/ },
+                        onClick = onReservationClick,
                         shape = RoundedCornerShape(16.dp),
                         colors = ButtonDefaults.textButtonColors(
                             backgroundColor = mainColor,
@@ -162,6 +163,8 @@ fun HospitalDetailScreen(
 @Composable
 fun HospitalDetailScreenPreview() {
     MedicalHackathonTheme {
-        HospitalDetailScreen()
+        HospitalDetailScreen(
+            onReservationClick = {},
+        )
     }
 }
