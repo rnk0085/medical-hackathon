@@ -12,6 +12,7 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
 @Composable
 fun HospitalListScreen(
+    modifier: Modifier = Modifier,
     onListTileClick: () -> Unit,
 ){
     LazyColumn(

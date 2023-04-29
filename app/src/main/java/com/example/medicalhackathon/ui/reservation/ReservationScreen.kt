@@ -1,7 +1,14 @@
 package com.example.medicalhackathon.ui.reservation
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.medicalhackathon.ui.common.HackathonTopAppBar
+import com.example.medicalhackathon.ui.common.HackathonTopAppBarUiState
 import com.example.medicalhackathon.ui.reservation.hospitalList.HospitalListScreen
 import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
@@ -9,9 +16,20 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 fun ReservationScreen(
     onListTileClick: () -> Unit,
 ){
-    HospitalListScreen(
-        onListTileClick = onListTileClick,
-    )
+    Scaffold(
+        topBar = {
+            HackathonTopAppBar(
+                hackathonTopAppBarUiState = HackathonTopAppBarUiState(
+                    title = "予約画面",
+                )
+            )
+        }
+    ) { innerPaddings ->
+        HospitalListScreen(
+            modifier = Modifier.fillMaxSize().padding(innerPaddings),
+            onListTileClick = onListTileClick,
+        )
+    }
 }
 
 @Preview
