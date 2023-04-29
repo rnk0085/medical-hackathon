@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
-import com.example.medicalhackathon.ui.theme.navigation.MainNavHost
-import com.example.medicalhackathon.ui.theme.navigation.MultipleItemsBottomNavigation
+import com.example.medicalhackathon.navigation.MainNavHost
+import com.example.medicalhackathon.navigation.MultipleItemsBottomNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

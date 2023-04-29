@@ -1,15 +1,16 @@
-package com.example.medicalhackathon.ui.theme.navigation
+package com.example.medicalhackathon.navigation
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,8 +30,16 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
  * ⑤マイページ
  */
 sealed class Screen(val route: String, val icon: ImageVector) {
-    object Profile : Screen("profile", Icons.Filled.Home)
-    object FriendsList : Screen("friendslist", Icons.Filled.Email)
+    object Home : Screen("Home", Icons.Filled.Home)
+
+    object Reservation : Screen("reservation", Icons.Filled.Search)
+
+    object Edit : Screen("edit", Icons.Filled.Edit)
+
+    // TODO: Qrコード表示部分のアイコンを設定
+    object QrCode : Screen("qrcode", Icons.Filled.Favorite)
+
+    object MyPage : Screen("mypage", Icons.Filled.AccountCircle)
 }
 
 // https://developer.android.com/jetpack/compose/navigation
@@ -43,13 +52,16 @@ fun MultipleItemsBottomNavigation(
         val currentDestination = navBackStackEntry?.destination
 
         val items = listOf(
-            Screen.Profile,
-            Screen.FriendsList,
+            Screen.Home,
+            Screen.Reservation,
+            Screen.Edit,
+            Screen.QrCode,
+            Screen.MyPage,
         )
 
         items.forEach { screen ->
             BottomNavigationItem(
-                icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+                icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(screen.route) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
