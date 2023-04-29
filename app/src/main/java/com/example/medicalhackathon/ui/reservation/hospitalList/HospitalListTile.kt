@@ -1,6 +1,7 @@
 package com.example.medicalhackathon.ui.reservation.hospitalList
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,13 +20,17 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
 @Composable
 fun HospitalListTile(
-    modifier: Modifier = Modifier,
     hospitalUiState: HospitalUiState,
+    onListTileClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ){
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 4.dp),
+            .padding(top = 4.dp)
+            .clickable(
+                onClick = onListTileClick,
+            ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         // TODO: 病院画像を設定する
@@ -57,8 +62,9 @@ fun HospitalListTile(
 private fun HospitalListTilePreview() {
     MedicalHackathonTheme {
         HospitalListTile(
-            modifier = Modifier.fillMaxWidth(),
             hospitalUiState = HospitalUiState.Initial,
+            onListTileClick = {},
+            modifier = Modifier.fillMaxWidth(),
         )
     }
 }

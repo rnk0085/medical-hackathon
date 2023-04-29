@@ -11,7 +11,9 @@ import androidx.compose.ui.unit.dp
 import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
 @Composable
-fun HospitalListScreen(){
+fun HospitalListScreen(
+    onListTileClick: () -> Unit,
+){
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -25,6 +27,7 @@ fun HospitalListScreen(){
             HospitalListTile(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
                 hospitalUiState = hospitalUiStateList[index],
+                onListTileClick = onListTileClick,
             )
         }
     }
@@ -34,6 +37,8 @@ fun HospitalListScreen(){
 @Composable
 private fun HospitalListScreenPreview() {
     MedicalHackathonTheme {
-        HospitalListScreen()
+        HospitalListScreen(
+            onListTileClick = {},
+        )
     }
 }

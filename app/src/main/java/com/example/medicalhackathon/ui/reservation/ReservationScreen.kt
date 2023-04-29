@@ -6,14 +6,20 @@ import com.example.medicalhackathon.ui.reservation.hospitalList.HospitalListScre
 import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
 @Composable
-fun ReservationScreen(){
-    HospitalListScreen()
+fun ReservationScreen(
+    onListTileClick: () -> Unit,
+){
+    HospitalListScreen(
+        onListTileClick = onListTileClick,
+    )
 }
 
 @Preview
 @Composable
 private fun ReservationScreenPreview() {
     MedicalHackathonTheme {
-        ReservationScreen()
+        ReservationScreen(
+            onListTileClick = {},
+        )
     }
 }

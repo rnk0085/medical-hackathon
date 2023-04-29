@@ -1,6 +1,5 @@
 package com.example.medicalhackathon.navigation
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -12,6 +11,7 @@ import com.example.medicalhackathon.ui.home.HomeScreen
 import com.example.medicalhackathon.ui.mypage.MyPageScreen
 import com.example.medicalhackathon.ui.qr.QrCodeScreen
 import com.example.medicalhackathon.ui.reservation.ReservationScreen
+import com.example.medicalhackathon.ui.reservation.hospitalList.HospitalDetailScreen
 
 @Composable
 fun MainNavHost(
@@ -23,12 +23,17 @@ fun MainNavHost(
         startDestination = Screen.Home.route,
         modifier = modifier,
     ) {
+        // ボトムタブ
         composable(Screen.Home.route) {
             HomeScreen()
         }
 
         composable(Screen.Reservation.route) {
-            ReservationScreen()
+            ReservationScreen(
+                onListTileClick = {
+                    navController.navigate(HackathonNavigation.HospitalDetail.route)
+                },
+            )
         }
 
         composable(Screen.Edit.route) {
@@ -41,6 +46,11 @@ fun MainNavHost(
 
         composable(Screen.MyPage.route) {
             MyPageScreen()
+        }
+
+        // その他
+        composable(HackathonNavigation.HospitalDetail.route) {
+            HospitalDetailScreen()
         }
     }
 }
