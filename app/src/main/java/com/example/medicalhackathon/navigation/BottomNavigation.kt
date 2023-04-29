@@ -29,17 +29,42 @@ import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
  * ④QRコード
  * ⑤マイページ
  */
-sealed class Screen(val route: String, val icon: ImageVector) {
-    object Home : Screen("Home", Icons.Filled.Home)
+sealed class Screen(
+    val route: String,
+    val name: String,
+    val icon: ImageVector,
+) {
+    object Home : Screen(
+        route = "Home",
+        name = "ホーム",
+        icon = Icons.Filled.Home,
+    )
 
-    object Reservation : Screen("reservation", Icons.Filled.Search)
+    object Reservation : Screen(
+        route = "reservation",
+        name = "予約",
+        icon = Icons.Filled.Search,
+    )
 
-    object Edit : Screen("edit", Icons.Filled.Edit)
+    object Edit : Screen(
+        route = "edit",
+        name = "編集",
+        icon = Icons.Filled.Edit,
+    )
 
     // TODO: Qrコード表示部分のアイコンを設定
-    object QrCode : Screen("qrcode", Icons.Filled.Favorite)
+    object QrCode : Screen(
+        route = "qrcode",
+        name = "QRコード",
+        icon = Icons.Filled.Favorite,
+    )
 
-    object MyPage : Screen("mypage", Icons.Filled.AccountCircle)
+    // TODO: マイページが切れている
+    object MyPage : Screen(
+        route = "mypage",
+        name = "マイページ",
+        icon = Icons.Filled.AccountCircle,
+    )
 }
 
 // https://developer.android.com/jetpack/compose/navigation
@@ -62,7 +87,7 @@ fun MultipleItemsBottomNavigation(
         items.forEach { screen ->
             BottomNavigationItem(
                 icon = { Icon(screen.icon, contentDescription = null) },
-                label = { Text(screen.route) },
+                label = { Text(screen.name) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {
