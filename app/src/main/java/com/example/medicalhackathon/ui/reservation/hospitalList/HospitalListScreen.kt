@@ -16,17 +16,27 @@ fun HospitalListScreen(
     onListTileClick: () -> Unit,
 ){
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
     ) {
+        item {
+            HospitalListTile(
+                hospitalUiState = HospitalUiState(
+                    name = hospitalName1,
+                    address = hospitalAddress1,
+                ),
+                onListTileClick = onListTileClick,
+            )
+        }
+
         val hospitalUiStateList = List(100) { num ->
             HospitalUiState(
                 name = "病院タイトル: $num",
                 address = "病院住所: $num",
             )
         }
+
         items(hospitalUiStateList.count()) {index ->
             HospitalListTile(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp),
                 hospitalUiState = hospitalUiStateList[index],
                 onListTileClick = onListTileClick,
             )
@@ -43,3 +53,6 @@ private fun HospitalListScreenPreview() {
         )
     }
 }
+
+const val hospitalName1 = "足立慶友整形外科"
+const val hospitalAddress1 = "東京都足立区足立１丁目１２−１２ メディカルモール ３階"
