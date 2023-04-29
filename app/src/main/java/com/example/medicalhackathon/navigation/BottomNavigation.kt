@@ -1,5 +1,11 @@
 package com.example.medicalhackathon.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -13,8 +19,13 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -55,7 +66,7 @@ sealed class Screen(
     // TODO: Qrコード表示部分のアイコンを設定
     object QrCode : Screen(
         route = "qrcode",
-        name = "QRコード",
+        name = "健康チェック",
         icon = Icons.Filled.Favorite,
     )
 
@@ -72,33 +83,55 @@ sealed class Screen(
 fun MultipleItemsBottomNavigation(
     navController: NavHostController = rememberNavController(),
 ) {
-    BottomNavigation {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
+    // https://qiita.com/Ryosuke-Android/items/2a94d4fed2586c0ed31c
+    BottomAppBar(
+        modifier = Modifier
+            .wrapContentHeight(),
+        cutoutShape = CircleShape,
+        backgroundColor = Color.White,
+    ) {
+        BottomNavigation(
+            modifier = Modifier.height(100.dp),
+            backgroundColor = Color.White,
+        ) {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentDestination = navBackStackEntry?.destination
 
-        val items = listOf(
-            Screen.Home,
-            Screen.Reservation,
-            Screen.Edit,
-            Screen.QrCode,
-            Screen.MyPage,
-        )
-
-        items.forEach { screen ->
-            BottomNavigationItem(
-                icon = { Icon(screen.icon, contentDescription = null) },
-                label = { Text(screen.name) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                onClick = {
-                    navController.navigate(screen.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+            val items = listOf(
+                Screen.Home,
+                Screen.Reservation,
+                Screen.Edit,
+                Screen.QrCode,
+                Screen.MyPage,
             )
+
+            items.forEach { screen ->
+                BottomNavigationItem(
+                    icon = {
+                        if (screen is Screen.Edit) null
+                        else Icon(screen.icon, contentDescription = null)
+                    },
+                    label = {
+                        if (screen is Screen.Edit) null
+                        else Text(
+                            text = screen.name,
+                            fontSize = 8.sp,
+                        )
+                    },
+                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                    onClick = {
+                        navController.navigate(screen.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                    selectedContentColor = Color.Black,
+                    unselectedContentColor = Color.Gray,
+                )
+            }
         }
     }
 }
