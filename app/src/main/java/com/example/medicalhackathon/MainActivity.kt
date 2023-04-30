@@ -11,12 +11,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.compose.rememberNavController
 import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 import com.example.medicalhackathon.navigation.MainNavHost
@@ -54,12 +52,12 @@ fun MainScreen() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screen.Edit.route)
+                    navController.navigate(Screen.QrCode.route)
                 },
                 contentColor = Color.White
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Edit,
+                    painter = painterResource(id = R.drawable.img_2),
                     contentDescription = null,
                 )
             }

@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.medicalhackathon.ui.edit.EditScreen
+import com.example.medicalhackathon.ui.healthCheck.HealthCheckScreen
 import com.example.medicalhackathon.ui.home.HomeScreen
 import com.example.medicalhackathon.ui.mypage.MyPageScreen
 import com.example.medicalhackathon.ui.qr.QrCodeScreen
@@ -38,12 +38,12 @@ fun MainNavHost(
             )
         }
 
-        composable(Screen.Edit.route) {
-            EditScreen()
-        }
-
         composable(Screen.QrCode.route) {
             QrCodeScreen()
+        }
+
+        composable(Screen.HealthCheck.route) {
+            HealthCheckScreen()
         }
 
         composable(Screen.MyPage.route) {
