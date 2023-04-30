@@ -8,6 +8,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,12 +18,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Checkbox
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -57,10 +60,6 @@ fun ReservationSecondScreen(
             )
         }
     ) { innerPaddings ->
-
-        var showDropdown by remember { mutableStateOf(false) }
-        var checkedState by remember { mutableStateOf(false) }
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,7 +68,7 @@ fun ReservationSecondScreen(
         ) {
             item {
                 Text(
-                    text = "症状はいつからですか？",
+                    text = "予約日時はどうしますか？",
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
@@ -106,7 +105,6 @@ fun ReservationSecondScreen(
                 val mDatePickerDialog = DatePickerDialog(
                     mContext,
                     { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-//                        mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
                         mDate.value = "$mYear/${mMonth+1}/$mDayOfMonth"
                         year.value = "$mYear"
                         month.value = "${mMonth+1}"
@@ -139,6 +137,118 @@ fun ReservationSecondScreen(
                             fontSize = 30.sp,
                             fontWeight = FontWeight.Medium,
                         )
+                    }
+                }
+            }
+
+            // 午前
+            item {
+                var checkedState by remember { mutableStateOf(false) }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    Checkbox(
+                        checked = checkedState,
+                        onCheckedChange = {
+                            checkedState = it
+                        },
+                    )
+                    Text(
+                        text = "午前",
+                    )
+                }
+
+
+                val checkboxItems = listOf(
+                    "9:00 ~ 9:30",
+                    "9:30 ~ 10:00",
+                    "10:00 ~ 10:30",
+                    "10:30 ~ 11:00",
+                    "11:00 ~ 11:30",
+                    "11:30 ~ 12:00",
+                    "12:00 ~ 12:30",
+                    "12:30 ~ 13:00",
+                )
+                val checkedItems = remember { mutableStateListOf<Boolean>() }
+                for (i in 0 until checkboxItems.size) {
+                    checkedItems.add(false)
+                }
+
+                if (checkedState) {
+                    checkboxItems.forEachIndexed { index, text ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .padding(start = 16.dp),
+                        ) {
+                            Checkbox(
+                                checked = checkedItems[index],
+                                onCheckedChange = {
+                                    checkedItems[index] = it
+                                },
+                            )
+                            Text(
+                                text = text,
+                            )
+                        }
+                    }
+                }
+            }
+
+            // 午前
+            item {
+                var checkedState by remember { mutableStateOf(false) }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    Checkbox(
+                        checked = checkedState,
+                        onCheckedChange = {
+                            checkedState = it
+                        },
+                    )
+                    Text(
+                        text = "午後",
+                    )
+                }
+
+
+                val checkboxItems = listOf(
+                    "15:00 ~ 15:30",
+                    "15:30 ~ 16:00",
+                    "16:00 ~ 16:30",
+                    "16:30 ~ 17:00",
+                    "17:00 ~ 17:30",
+                    "17:30 ~ 18:00",
+                    "18:00 ~ 18:30",
+                    "18:30 ~ 19:00",
+                )
+                val checkedItems = remember { mutableStateListOf<Boolean>() }
+                for (i in 0 until checkboxItems.size) {
+                    checkedItems.add(false)
+                }
+
+                if (checkedState) {
+                    checkboxItems.forEachIndexed { index, text ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .padding(start = 16.dp),
+                        ) {
+                            Checkbox(
+                                checked = checkedItems[index],
+                                onCheckedChange = {
+                                    checkedItems[index] = it
+                                },
+                            )
+                            Text(
+                                text = text,
+                            )
+                        }
                     }
                 }
             }
@@ -208,6 +318,10 @@ fun ReservationSecondScreen(
                         )
                     }
                 }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(120.dp))
             }
         }
     }
