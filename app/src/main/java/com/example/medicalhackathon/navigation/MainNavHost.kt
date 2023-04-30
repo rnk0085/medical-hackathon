@@ -68,7 +68,9 @@ fun MainNavHost(
         }
 
         composable(HackathonNavigation.ReservationSecond.route) {
-            ReservationSecondScreen()
+            ReservationSecondScreen(
+                onSubmitClick = {},
+            )
         }
     }
 }
