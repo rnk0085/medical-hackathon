@@ -27,7 +27,9 @@ fun MainNavHost(
     ) {
         // ボトムタブ
         composable(Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                hasReservation = false,
+            )
         }
 
         composable(Screen.Reservation.route) {
@@ -67,9 +69,15 @@ fun MainNavHost(
             )
         }
 
+        composable("home_after") {
+            HomeScreen(hasReservation = true)
+        }
+
         composable(HackathonNavigation.ReservationSecond.route) {
             ReservationSecondScreen(
-                onSubmitClick = {},
+                onSubmitClick = {
+                    navController.navigate("home_after")
+                },
             )
         }
     }

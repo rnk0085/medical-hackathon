@@ -17,7 +17,9 @@ import com.example.medicalhackathon.ui.common.HackathonTopAppBarUiState
 import com.example.medicalhackathon.ui.theme.MedicalHackathonTheme
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(
+    hasReservation: Boolean,
+){
     Scaffold(
         topBar = {
             HackathonTopAppBar(
@@ -41,20 +43,22 @@ fun HomeScreen(){
                 )
             }
 
-            item {
-                HomeCardSection(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = 8.dp,
-                            vertical = 16.dp,
-                        ),
-                    backgroundColor = mainColor,
-                    leftText = "次回予約",
-                    rightText = UtilText.hospitalName1,
-                    mainText = UtilText.reservationDate1,
-                    isReservation = true,
-                )
+            if (hasReservation) {
+                item {
+                    HomeCardSection(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 8.dp,
+                                vertical = 16.dp,
+                            ),
+                        backgroundColor = mainColor,
+                        leftText = "次回予約",
+                        rightText = UtilText.hospitalName1,
+                        mainText = UtilText.reservationDate1,
+                        isReservation = true,
+                    )
+                }
             }
 
             item {
@@ -80,6 +84,8 @@ fun HomeScreen(){
 @Composable
 private fun HomeScreenPreview() {
     MedicalHackathonTheme {
-        HomeScreen()
+        HomeScreen(
+            hasReservation = true,
+        )
     }
 }
