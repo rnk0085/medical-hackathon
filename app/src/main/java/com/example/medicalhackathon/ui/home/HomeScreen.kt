@@ -52,7 +52,7 @@ fun HomeScreen(){
                     backgroundColor = mainColor,
                     leftText = "次回予約",
                     rightText = UtilText.hospitalName1,
-                    mainText = "5/2(火) 14:00",
+                    mainText = UtilText.reservationDate1,
                     isReservation = true,
                 )
             }
