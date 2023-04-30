@@ -33,7 +33,9 @@ import com.example.medicalhackathon.ui.common.HackathonTopAppBarUiState
  * 初診予約：その1
  */
 @Composable
-fun ReservationFirstScreen(){
+fun ReservationFirstScreen(
+    onNextClick: () -> Unit,
+){
     Scaffold(
         topBar = {
             HackathonTopAppBar(
@@ -175,7 +177,7 @@ fun ReservationFirstScreen(){
                     contentAlignment = Alignment.Center,
                 ) {
                     Button(
-                        onClick = { /* TODO */ },
+                        onClick = onNextClick,
                         shape = RoundedCornerShape(16.dp),
                         colors = ButtonDefaults.textButtonColors(
                             backgroundColor = UtilColor.mainColor,

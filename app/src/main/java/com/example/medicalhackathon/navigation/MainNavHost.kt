@@ -12,6 +12,7 @@ import com.example.medicalhackathon.ui.mypage.MyPageScreen
 import com.example.medicalhackathon.ui.qr.QrCodeScreen
 import com.example.medicalhackathon.ui.reservation.ReservationFirstScreen
 import com.example.medicalhackathon.ui.reservation.ReservationScreen
+import com.example.medicalhackathon.ui.reservation.ReservationSecondScreen
 import com.example.medicalhackathon.ui.reservation.hospitalList.HospitalDetailScreen
 
 @Composable
@@ -59,7 +60,15 @@ fun MainNavHost(
         }
 
         composable(HackathonNavigation.ReservationFirst.route) {
-            ReservationFirstScreen()
+            ReservationFirstScreen(
+                onNextClick = {
+                    navController.navigate(HackathonNavigation.ReservationSecond.route)
+                }
+            )
+        }
+
+        composable(HackathonNavigation.ReservationSecond.route) {
+            ReservationSecondScreen()
         }
     }
 }

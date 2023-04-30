@@ -13,4 +13,8 @@ sealed class HackathonNavigation(
     object ReservationFirst : HackathonNavigation(
         route = "reservation_first"
     )
+
+    object ReservationSecond : HackathonNavigation(
+        route = "reservation_second"
+    )
 }
